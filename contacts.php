@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <?php include_once 'reusable/head.php'; ?>
@@ -20,7 +23,7 @@
         <?php
             $title = 'Contacts';
             ob_start();
-            include_once 'reusable/pageHeader.php';
+            include 'reusable/pageHeader.php';
             $output = ob_get_contents();
             $output = str_replace('Placeholder', $title, $output);
             ob_end_clean(); // Clear the buffer.
@@ -29,28 +32,57 @@
 
         <?php include_once 'reusable/nav.php'; ?>
 
-        <div class="table">
-            <table >
-                <tr>
-                    <th>Name</th>
-                    <th>Phone #</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                </tr>
+        <?php
+            $queries = array();
+            parse_str($_SERVER['QUERY_STRING'], $queries);
+            $_SESSION['id'] = chop($queries['v']);
 
-            <!-- Iterate all the persons rows, and for each row, parse each column into table -->
-            <?php foreach ($persons as $person): ?>
-                <?php $columns = explode(",", $person) ?>
-                <tr>
-                    <td><?php echo $columns[0]; ?></td>
-                    <td><?php echo $columns[1]; ?></td>
-                    <td><?php echo $columns[2]; ?></td>
-                    <td><?php echo $columns[3]; ?></td>
-                </tr>
-            <?php endforeach; ?>
+            echo "
+            <script type='text/javascript'>
+            
+                changeValue()
+                function changeValue()
+                {
+                    document.getElementById('logButton').value = ".$_SESSION['id']."
+                }
 
-            </table>
-        </div>
+            </script> ";
+
+
+
+            if (strlen($_SESSION['id']) <= 0) {
+                echo "Please login to see the list of User";
+            } else{
+                echo "
+                <div class='table'>
+                    <table >
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone #</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                        ";
+                    // <!-- Iterate all the persons rows, and for each row, parse each column into table -->
+                     foreach ($persons as $person):
+                         $columns = explode(",", $person);
+                         echo "
+                            <tr>
+                                <td>". $columns[0] ."</td>".
+                                "<td>". $columns[1]."</td>".
+                                "<td>". $columns[2]."</td>".
+                                "<td>". $columns[3]."</td>
+                            </tr>"
+                            ;
+                    endforeach;
+                    echo "
+                    </table>
+                </div>
+                ";
+            }
+        ?>
+
+
 
 
     </body>

@@ -1,21 +1,26 @@
 
 <div class="top">
+    <?php  echo "
+        <script>
+            console.log('i am here');
+        </script> ";
+    ?>
     <div>
-        <input id="logButton" type="button" value="Login" onclick="openForm()">
+        <input id="logButton" type="button" value="<?php getLoginStatus() ?>" onclick="openForm()">
     </div>
 
     <!-- https://www.w3schools.com/howto/howto_js_popup_form.asp -->
-    <div class="form-popup" id="myForm">
-        <form action="reusable/login.php" class="form-container">
+    <div class="form-popup" id="myForm" >
+        <form action="reusable/login.php" class="form-container" method = "post">
             <h1>Login</h1>
 
             <label for="id"><b>User ID</b></label>
             <input type="text" placeholder="Enter User ID" name="id" required>
 
             <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+            <input type="password" placeholder="Enter Password" name="psw" >
 
-            <button type="submit" class="btn">Login</button>
+            <button type="submit" class="btn" name="submit">Login</button>
             <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
         </form>
     </div>
@@ -25,13 +30,22 @@
 
 
 <?php  echo "
-<script>
-function openForm() {
-  document.getElementById('myForm').style.display = 'block';
-}
+    <script>
+    function openForm() {
+      document.getElementById('myForm').style.display = 'block';
+    }
 
-function closeForm() {
-  document.getElementById('myForm').style.display = 'none';
-}
-</script> ";
+    function closeForm() {
+      document.getElementById('myForm').style.display = 'none';
+    }
+    </script> ";
+
+
+    function getLoginStatus(){
+        if (isset($_SESSION['id']) && strlen($_SESSION['id'] > 0)) {
+            echo "Logout";
+        } else{
+            echo "Login";
+        }
+    }
 ?>

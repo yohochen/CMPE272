@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
     <?php include_once 'reusable/head.php'; ?>
@@ -7,7 +10,7 @@
         <?php
             $title = 'About';
             ob_start();
-            include_once 'reusable/pageHeader.php';
+            include 'reusable/pageHeader.php';
             $output = ob_get_contents();
             $output = str_replace('Placeholder', $title, $output);
             ob_end_clean(); // Clear the buffer.

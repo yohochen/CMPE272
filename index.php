@@ -1,10 +1,12 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
-<?php include_once 'reusable/head.php'; ?>
-<?php
-// session_start();
-?>
+<head>
+    <?php include_once 'reusable/head.php'; ?>
+</head>
+
 
     <body>
 
@@ -13,7 +15,7 @@
     <?php
         $title = 'Teach Me Piano!';
         ob_start();
-        include_once 'reusable/pageHeader.php';
+        include('reusable/pageHeader.php');
         $output = ob_get_contents();
         $output = str_replace('Placeholder', $title, $output);
         ob_end_clean(); // Clear the buffer.
@@ -27,8 +29,6 @@
 
 
     <p>Welcome to Teach Me Piano!!!</p>
-
-
 
 
     </body>
