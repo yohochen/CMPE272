@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
-<?php include_once 'reusable/head.php'; ?>
-<body>
+    <?php include_once 'reusable/head.php'; ?>
+    <body>
 
-<h1>About</h1>
+        <!-- Page title -->
+        <?php
+            $title = 'About';
+            ob_start();
+            include_once 'reusable/pageHeader.php';
+            $output = ob_get_contents();
+            $output = str_replace('Placeholder', $title, $output);
+            ob_end_clean(); // Clear the buffer.
+            echo $output; // Print everything.
+         ?>
 
-<?php include_once 'reusable/nav.php'; ?>
+        <?php include_once 'reusable/nav.php'; ?>
 
-<p>In Teach Me Piano, We Provide a Service to Match Piano Learners with the Best Tutor They Need!</p>
+        <p>In Teach Me Piano, We Provide a Service to Match Piano Learners with the Best Tutor They Need!</p>
 
 
 
-</body>
+    </body>
 </html>

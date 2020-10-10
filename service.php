@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
-<?php include_once 'reusable/head.php'; ?>
+    <?php include_once 'reusable/head.php'; ?>
 
-<body>
+    <body>
 
-<h1>Service</h1>
+        <!-- Page title -->
+        <?php
+            $title = 'Service';
+            ob_start();
+            include_once 'reusable/pageHeader.php';
+            $output = ob_get_contents();
+            $output = str_replace('Placeholder', $title, $output);
+            ob_end_clean(); // Clear the buffer.
+            echo $output; // Print everything.
+         ?>
 
-<?php include_once 'reusable/nav.php'; ?>
+        <?php include_once 'reusable/nav.php'; ?>
 
-<p>Service, coming soon!</p>
+        <p>Service, coming soon!</p>
 
 
 
-</body>
+    </body>
 </html>
