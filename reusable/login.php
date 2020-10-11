@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     extract($_POST);
 
     if(!chop($id) || !$psw){
@@ -13,21 +13,18 @@
     if(isset($_POST["submit"])) {
         if($_POST['id'] === 'admin' || $_POST['id'] === '272'){
             $_SESSION["id"] = $_POST['id'];
-            header("Location: ../contacts.php?v=".$_SESSION["id"]);
-            exit;
+            header("Location: ../index.php");
+            // exit;
         }
         else{
             accessDenied();
         }
     }
 
-
-
     function accessDenied(){
         print("<title> Access Denied </title>
             <strong>Your UserID and password are incorrect!</strong>" );
     }
-
 
 
     function invalidInput(){

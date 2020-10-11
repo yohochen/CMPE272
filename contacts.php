@@ -35,11 +35,10 @@ session_start();
         <?php
             $queries = array();
             parse_str($_SERVER['QUERY_STRING'], $queries);
-            $_SESSION['id'] = chop($queries['v']);
 
             echo "
             <script type='text/javascript'>
-            
+
                 changeValue()
                 function changeValue()
                 {

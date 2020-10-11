@@ -26,6 +26,7 @@ session_start();
 
     <?php include_once 'reusable/nav.php'; ?>
 
+    <!-- <?php echo print_r($_SESSION); ?> -->
 
 
     <p>Welcome to Teach Me Piano!!!</p>
