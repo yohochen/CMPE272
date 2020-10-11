@@ -33,21 +33,7 @@ session_start();
         <?php include_once 'reusable/nav.php'; ?>
 
         <?php
-            $queries = array();
-            parse_str($_SERVER['QUERY_STRING'], $queries);
-
-            echo "
-            <script type='text/javascript'>
-
-                changeValue()
-                function changeValue()
-                {
-                    document.getElementById('logButton').value = ".$_SESSION['id']."
-                }
-
-            </script> ";
-
-
+            
 
             if (strlen($_SESSION['id']) <= 0) {
                 echo "Please login to see the list of User";

@@ -1,10 +1,5 @@
 
 <div class="top">
-    <?php  echo "
-        <script>
-            console.log('i am here');
-        </script> ";
-    ?>
     <div>
         <input id="logButton" type="button" value="<?php getLoginStatus() ?>" onclick="openForm()">
     </div>
@@ -48,4 +43,23 @@
             echo "Login";
         }
     }
+?>
+
+
+<!-- Change Login/Logout button based on session status -->
+<?php
+    echo "
+    <script type='text/javascript'>
+
+        changeValue()
+        function changeValue()
+        {
+            if(".json_encode($_SESSION['id'])."){
+                document.getElementById('logButton').value = 'Logout'
+            }
+            else {
+                document.getElementById('logButton').value = 'Login'
+            }
+        }
+    </script> ";
 ?>
