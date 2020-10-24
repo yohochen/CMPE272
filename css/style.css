@@ -2,7 +2,7 @@
 body {
     text-align: center;
     font-family: -apple-system, Times, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol" !important;
-    
+
 }
 
 .top > h1 {
@@ -30,8 +30,8 @@ body {
 
 
 .table{
-    margin-left: 5%;
-    margin-right: 5%;
+    /* margin-left: 5%;
+    margin-right: 5%; */
 }
 
 table {

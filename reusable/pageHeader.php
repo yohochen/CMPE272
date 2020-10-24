@@ -50,16 +50,19 @@
 <?php
     echo "
     <script type='text/javascript'>
-
         changeValue()
         function changeValue()
         {
-            if(".json_encode($_SESSION['id'])."){
-                document.getElementById('logButton').value = 'Logout'
-            }
-            else {
-                document.getElementById('logButton').value = 'Login'
-            }
+            // if( isset() ){
+                if(".json_encode($_SESSION['id'])."){
+                    document.getElementById('logButton').value = 'Logout'
+                    console.log('time to logout');
+                }
+                else {
+                    document.getElementById('logButton').value = 'Login'
+                    console.log('time to login');
+                }
+            // }
         }
     </script> ";
 ?>
