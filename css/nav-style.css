@@ -1,8 +1,11 @@
 
 
+.nav-text{
+    width:100%;  
+}
 
-nav a:link,
-nav a:visited{
+.nav-text a:link,
+.nav-text a:visited{
   color: black;
   padding: 8px ;
   text-decoration: none;
@@ -10,9 +13,11 @@ nav a:visited{
   font-size: 90%;
   border-bottom: 5px solid transparent;
   transition: border-bottom 0.3s;
+
 }
 
 .navbar{
     padding: 20px;
     padding-bottom: 50px;
+    text-align: center;
 }
