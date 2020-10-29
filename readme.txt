@@ -43,3 +43,11 @@ CREATE TABLE `user` (
   `homePhone` char(255) NOT NULL,
   `cellPhone` char(255) NOT NULL
 ) ENGINE=InnoDB ;
+3.
+INSERT INTO `user` (firstName, lastName, email, address, homePhone, cellPhone) VALUES ('Mic1', 'Jordan', 'mic@gmailcom', '1234567890', '1234567890', '1234567890');
+
+INSERT INTO `names` (name_first, name_last) VALUES ('Clark','Kent');
+
+
+*.
+SELECT `User`, `Host` FROM mysql.user;
