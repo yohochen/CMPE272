@@ -1,10 +1,36 @@
 <?php
 session_start();
+
+function displayLastVisited(){
+    $lastVisited = unserialize($_COOKIE['lastVisited']);
+    foreach ($lastVisited as $key => $value) {
+        echo '<li class="list-group-item d-flex justify-content-center">Teacher '.$value.'</li>';
+    }
+}
+
+function displayMostVisited()
+{
+    $mostVisited = unserialize($_COOKIE['mostVisited']);
+    $count = 0;
+    foreach ($mostVisited as $key => $value) {
+        echo <<<_END
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Teacher $key   	&nbsp &nbsp &nbsp  <span class="badge badge-secondary">$value</span>
+                </li>
+            _END;
+        $count += 1;
+        if($count >= 5){
+            break;
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 
 
 <style>
+    /* Bootstrap Reference */
+    /* https://getbootstrap.com/docs/4.0/components/list-group/ */
     .card-container {
         padding: 30px 50px;
         /* background-color: red; */
@@ -13,27 +39,10 @@ session_start();
     .card {
         margin: 15px;
     }
-
-    /* .card {
-        margin-bottom: 15px;
-    } */
-
 </style>
 
 <html>
     <head>
-        <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-                    crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-
         <?php include_once 'reusable/head.php'; ?>
     </head>
     <?php include_once 'reusable/head.php'; ?>
@@ -115,26 +124,25 @@ session_start();
         </div>
 
         <div class="card-container">
-           <div class="card-deck">
+           <div class="card-deck" style="width: 50%; margin:auto auto">
                <div class="card primary">
-                   <h5 class="card-header bg-danger text-white" style="text-align:center">Last Visited Teachers</h5>
+                   <h5 class="card-header bg-dark text-white" style="text-align:center">Last Visited Teachers</h5>
                    <div class="card-body">
                        <ul class="list-group">
-
+                            <?php displayLastVisited() ?>
                        </ul>
                    </div>
                </div>
 
                <div class="card">
-                   <h5 class="card-header bg-success text-white" style="text-align:center">Most Visited / Popular Teacher</h5>
+                   <h5 class="card-header bg-dark text-white" style="text-align:center">Most Visited / Popular Teacher</h5>
                    <div class="card-body">
                        <ul class="list-group">
-
+                           <?php displayMostVisited() ?>
                        </ul>
                    </div>
                </div>
            </div>
        </div>
-
     </body>
 </html>

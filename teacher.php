@@ -1,5 +1,46 @@
 <?php
 session_start();
+
+$selected = $_GET['t'];
+$mostVisited = array();
+$lastVisited = array();
+
+// Deal with most visited
+if(isset($_COOKIE['mostVisited'])) {
+
+    $mostVisited = unserialize($_COOKIE['mostVisited']);
+    $freq = array_key_exists($selected, $mostVisited) ? $mostVisited[$selected] + 1 : 1;
+    $mostVisited[$selected] = $freq;
+
+    arsort($mostVisited);
+    // if(count($mostVisited) > 10){
+    //     array_pop($mostVisited);
+    // }
+}else{
+    $mostVisited[$selected] = 1;
+}
+
+
+
+// Deal with last visited
+if(isset($_COOKIE['lastVisited'])) {
+    $lastVisited = unserialize($_COOKIE['lastVisited']);
+
+    if (($index = array_search($selected, $lastVisited)) !== false) {
+        unset($lastVisited[$index]);
+        $lastVisited = array_values($lastVisited);
+    }
+    array_unshift($lastVisited, $selected);
+    if(count($lastVisited) > 5){
+        array_pop($lastVisited);
+    }
+}else{
+    array_push($lastVisited, $selected);
+}
+
+setcookie( "lastVisited", serialize($lastVisited), time() + 3600); // expire in 1 hour
+setcookie( "mostVisited", serialize($mostVisited), time() + 3600); // expire in 1 hour
+
 ?>
 <!DOCTYPE html>
 <html>
