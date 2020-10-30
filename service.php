@@ -17,7 +17,7 @@ function displayMostVisited()
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Teacher $key   	&nbsp &nbsp &nbsp  <span class="badge badge-secondary">$value</span>
                 </li>
-            _END;
+_END;
         $count += 1;
         if($count >= 5){
             break;
@@ -25,9 +25,8 @@ function displayMostVisited()
     }
 }
 ?>
+
 <!DOCTYPE html>
-
-
 <style>
     /* Bootstrap Reference */
     /* https://getbootstrap.com/docs/4.0/components/list-group/ */
@@ -45,7 +44,6 @@ function displayMostVisited()
     <head>
         <?php include_once 'reusable/head.php'; ?>
     </head>
-    <?php include_once 'reusable/head.php'; ?>
 
     <body>
 
@@ -129,7 +127,7 @@ function displayMostVisited()
                    <h5 class="card-header bg-dark text-white" style="text-align:center">Last Visited Teachers</h5>
                    <div class="card-body">
                        <ul class="list-group">
-                            <?php displayLastVisited() ?>
+                            <?php displayLastVisited(); ?>
                        </ul>
                    </div>
                </div>
@@ -138,7 +136,7 @@ function displayMostVisited()
                    <h5 class="card-header bg-dark text-white" style="text-align:center">Most Visited / Popular Teacher</h5>
                    <div class="card-body">
                        <ul class="list-group">
-                           <?php displayMostVisited() ?>
+                           <?php displayMostVisited(); ?>
                        </ul>
                    </div>
                </div>
