@@ -13,9 +13,6 @@ if(isset($_COOKIE['mostVisited'])) {
     $mostVisited[$selected] = $freq;
 
     arsort($mostVisited);
-    // if(count($mostVisited) > 10){
-    //     array_pop($mostVisited);
-    // }
 }else{
     $mostVisited[$selected] = 1;
 }
