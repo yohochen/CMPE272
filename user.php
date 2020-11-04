@@ -20,7 +20,6 @@ submitDBInput();
 
 
 function fetchAll() {
-
     $conn = $GLOBALS['conn'];
     $query = "select * from user";
     return $conn->query($query);

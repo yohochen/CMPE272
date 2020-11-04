@@ -1,8 +1,42 @@
 <?php
 session_start();
 
+// fetching my own company's user
+$server = 'localhost';
+$username = 'root';
+$password = 'password';
+$db = 'cmpe272';
 
-function tableHandler($dbRows) {
+$conn = new mysqli($server, $username, $password, $db);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$GLOBALS['conn'] = $conn;
+
+function fetchAll() {
+    $conn = $GLOBALS['conn'];
+    $query = "select * from user";
+    return $conn->query($query);
+}
+
+
+
+// fetching my team's company user
+$ch = curl_init();
+// set URL and other appropriate options
+curl_setopt($ch, CURLOPT_URL, "http://yohoc.xyz/curl.php");
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// grab URL and pass it to the browser
+$curl_output = curl_exec($ch);
+
+// close cURL resource, and free up system resources
+curl_close($ch);
+
+function tableTop() {
     echo <<<_END
             <table class="table">
                 <thead>
@@ -17,8 +51,28 @@ function tableHandler($dbRows) {
                 </thead>
                 <tbody>
 _END;
+}
+function tableBottom() {
+    echo "</tbody>";
+    echo "</table>";
+}
 
-    while ($row = $dbRows->fetch_assoc()) {
+function tableHandler_json($json) {
+    $json_array = json_decode($json, true);
+    foreach($json_array as $json_obj) {
+        echo "<tr>";
+        echo '<td>'.$json_obj['firstName'].'</td>';
+        echo '<td>'.$json_obj["lastName"].'</td>';
+        echo '<td>'.$json_obj["email"].'</td>';
+        echo '<td>'.$json_obj["address"].'</td>';
+        echo '<td>'.$json_obj["homePhone"].'</td>';
+        echo '<td>'.$json_obj["cellPhone"].'</td>';
+        echo "</tr>";
+    }
+}
+
+function tableHandler_sql($sql_rows) {
+    while ($row = $sql_rows->fetch_assoc()) {
         echo "<tr>";
         echo '<td>'.$row['firstName'].'</td>';
         echo '<td>'.$row["lastName"].'</td>';
@@ -73,7 +127,12 @@ _END;
             <div class="card">
                 <h5 class="card-header">Users of All Companies</h5>
                 <div class="card-body">
-                    <?php tableHandler(null)?>
+                    <?php
+                        tableTop();
+                        tableHandler_json($curl_output);
+                        tableHandler_sql(fetchAll());
+                        tableBottom();
+                    ?>
                 </div>
             </div>
         </div>
