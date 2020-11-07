@@ -142,7 +142,7 @@ function tableHandler_sql($sql_rows) {
                 <div class="card-body">
                     <?php
                         tableTop();
-                        tableHandler_json($curl_output);
+                        tableHandler_sql(fetchAll());
                         tableBottom();
                     ?>
                 </div>
