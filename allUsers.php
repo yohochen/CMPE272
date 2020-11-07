@@ -26,10 +26,9 @@ function fetchAll() {
 // fetching my team's company user
 $ch = curl_init();
 // set URL and other appropriate options
-curl_setopt($ch, CURLOPT_URL, "http://yohoc.xyz/curl.php");
+curl_setopt($ch, CURLOPT_URL, "http://18.212.32.161/curl.php");
 curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
 // grab URL and pass it to the browser
 $curl_output = curl_exec($ch);
 
@@ -58,17 +57,19 @@ function tableBottom() {
 }
 
 function tableHandler_json($json) {
-    $json_array = json_decode($json, true);
+    $json = strip_tags($json); // DEBUGED for 2 hours: strip html tags!!!
+    $json_array = json_decode(html_entity_decode($json), true);
     foreach($json_array as $json_obj) {
         echo "<tr>";
         echo '<td>'.$json_obj['firstName'].'</td>';
         echo '<td>'.$json_obj["lastName"].'</td>';
         echo '<td>'.$json_obj["email"].'</td>';
-        echo '<td>'.$json_obj["address"].'</td>';
+        echo '<td>'.$json_obj["homeAddress"].'</td>';
         echo '<td>'.$json_obj["homePhone"].'</td>';
         echo '<td>'.$json_obj["cellPhone"].'</td>';
         echo "</tr>";
     }
+    // echo json_last_error();
 }
 
 function tableHandler_sql($sql_rows) {
@@ -125,12 +126,23 @@ function tableHandler_sql($sql_rows) {
 
         <div class="card-container">
             <div class="card">
-                <h5 class="card-header">Users of All Companies</h5>
+                <h5 class="card-header">This Companies</h5>
                 <div class="card-body">
                     <?php
                         tableTop();
                         tableHandler_json($curl_output);
-                        tableHandler_sql(fetchAll());
+                        tableBottom();
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <h5 class="card-header">JingJing's Companies</h5>
+                <div class="card-body">
+                    <?php
+                        tableTop();
+                        tableHandler_json($curl_output);
                         tableBottom();
                     ?>
                 </div>
